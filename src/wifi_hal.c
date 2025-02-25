@@ -774,6 +774,7 @@ INT wifi_hal_setRadioOperatingParameters(wifi_radio_index_t index, wifi_radio_op
         radio->oper_param.channelWidth = operationParam->channelWidth;
         radio->oper_param.autoChannelEnabled = operationParam->autoChannelEnabled;
         radio->oper_param.DfsEnabledBootup = operationParam->DfsEnabledBootup;
+        wifi_hal_error_print("%s:%d: VVDN channel = %d, bw = %d\n", __func__, __LINE__, radio->oper_param.channel,  radio->oper_param.channelWidth);
         memcpy(radio->oper_param.channel_map, operationParam->channel_map,
             sizeof(radio->oper_param.channel_map));
 
