@@ -3419,7 +3419,7 @@ enum nl80211_chan_width platform_get_bandwidth(wifi_interface_info_t *interface)
 
     platform_get_current_chanspec(interface->name, chanspec, sizeof(chanspec));
     width = platform_get_chanspec_bandwidth(chanspec);
-    wifi_hal_dbg_print("%s - Interface=%s chanspec=%s width=%d\n", __func__, interface->name, chanspec, width);
+    wifi_hal_dbg_print("VVDN %s - Interface=%s chanspec=%s width=%d\n", __func__, interface->name, chanspec, width);
     return width;
 }
 
