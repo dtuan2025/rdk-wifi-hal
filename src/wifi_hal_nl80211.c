@@ -10039,6 +10039,10 @@ static int nl80211_send_frame_cmd(wifi_interface_info_t *interface, unsigned int
         (csa_offs && nla_put(msg, NL80211_ATTR_CSA_C_OFFSETS_TX,
                              csa_offs_len * sizeof(u16), csa_offs)) ||
         nla_put(msg, NL80211_ATTR_FRAME, buf_len, buf)) {
+        wifi_hal_info_print("nl80211: Frame command failed: msg = %p, freq = %d, wait = %d, offchanok = %d, no_ack = %d, csa_offs = %d \n",
+            msg, freq && nla_put_u32(msg, NL80211_ATTR_WIPHY_FREQ, freq), wait && nla_put_u32(msg, NL80211_ATTR_DURATION, wait),
+            offchanok && nla_put_flag(msg, NL80211_ATTR_OFFCHANNEL_TX_OK), no_ack && nla_put_flag(msg, NL80211_ATTR_DONT_WAIT_FOR_ACK),
+            csa_offs && nla_put(msg, NL80211_ATTR_CSA_C_OFFSETS_TX, csa_offs_len * sizeof(u16), csa_offs));
         goto fail;
     }
 
@@ -11008,9 +11012,9 @@ send_frame_cmd:
         offchanok = 0;
     }
 
-    //wifi_hal_dbg_print("nl80211: send_mlme -> send_frame_cmd\n");
     res = nl80211_send_frame_cmd(interface, freq, wait, data, data_len,
               use_cookie, offchanok, noack, csa_offs, csa_offs_len);
+    wifi_hal_dbg_print("nl80211: send_mlme -> send_frame_cmd: offchanok = %d, res = %d\n", offchanok, res);
 
     return res;
 }
