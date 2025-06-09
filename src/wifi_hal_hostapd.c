@@ -612,6 +612,7 @@ int update_security_config(wifi_vap_security_t *sec, struct hostapd_bss_config *
                 case wifi_security_mode_wpa_personal:
                 case wifi_security_mode_wpa2_personal:
                 case wifi_security_mode_wpa_wpa2_personal:
+                case wifi_security_mode_wpa3_transition:
                     conf->wpa_key_mgmt |= WPA_KEY_MGMT_PSK_SHA256;
                     break;
                 case wifi_security_mode_wpa_enterprise:
